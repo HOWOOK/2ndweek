@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
@@ -73,6 +74,26 @@ public class Tab1Contacts extends Fragment implements WebService.WebserviceRespo
             }
         });
 
+        lv_main.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View v, int postion, long id) {
+                try{
+                    final TextView del_employee_name= v.findViewById(R.id.emName);
+                    final TextView del_employee_city= v.findViewById(R.id.emCity);
+                    final TextView del_employee_age =v.findViewById(R.id.emAge);
+
+                    RemoveRq removeRq = new RemoveRq(del_employee_name.getText().toString(), del_employee_city.getText().toString(), del_employee_age.getText().toString());
+
+
+                    new WebService(Tab1Contacts.this, (WebService.WebserviceResponseListner) Tab1Contacts.this,
+                            "remove").execute();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
         return rootView;
     }
 
@@ -111,6 +132,19 @@ public class Tab1Contacts extends Fragment implements WebService.WebserviceRespo
         String age;
 
         public AddEmployeeRequest(String name, String city, String age) {
+            this.name = name;
+            this.city = city;
+            this.age = age;
+        }
+    }
+
+    public class RemoveRq {
+
+        String name;
+        String city;
+        String age;
+
+        public RemoveRq(String name, String city, String age) {
             this.name = name;
             this.city = city;
             this.age = age;
@@ -188,44 +222,22 @@ public class Tab1Contacts extends Fragment implements WebService.WebserviceRespo
     }
 
 
-    public class ShowEmployeesResponse {
+    public class Remove {
 
-        ArrayList<employee> employee;
+        String success;
 
-        public class employee {
-
-            String name, city, age;
-
-            public employee(String name, String city, String age) {
-                this.name = name;
-                this.city = city;
-                this.age = age;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getCity() {
-                return city;
-            }
-
-            public void setCity(String city) {
-                this.city = city;
-            }
-
-            public String getAge() {
-                return age;
-            }
-
-            public void setAge(String age) {
-                this.age = age;
-            }
+        public Remove(String success) {
+            this.success = success;
         }
+
+        public String getSuccess() {
+            return success;
+        }
+
+        public void setSuccess(String success) {
+            this.success = success;
+        }
+
     }
 
 
@@ -281,6 +293,17 @@ public class Tab1Contacts extends Fragment implements WebService.WebserviceRespo
                     ememem.add(dddd);
                 }
                 adpater.notifyDataSetChanged();
+            } else if(webServiceName.equalsIgnoreCase("remove")){
+
+                Remove data = (Remove) response;
+
+                if (!flagToCheckFailure) {
+                    Toast.makeText(getContext(), "Empolyee delete", Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(getContext(), "Something went Wrong", Toast.LENGTH_LONG).show();
+                }
+                //TODO
             } else {
                 Toast.makeText(getContext(), "Something went Wrong", Toast.LENGTH_LONG).show();
             }

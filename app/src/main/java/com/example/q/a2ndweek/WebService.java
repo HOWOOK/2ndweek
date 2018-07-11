@@ -18,6 +18,7 @@ public class WebService extends AsyncTask<String, Void, String> {
     WebserviceResponseListner listener = null;
     String METHOD_NAME = "";
     Tab1Contacts.AddEmployeeRequest mAddEmployeePojo;
+    Tab1Contacts.RemoveRq mRemoveRq;
 
     public WebService(Fragment Fragment, WebserviceResponseListner listner, String methodName) {
         this.Fragment = Fragment;
@@ -46,8 +47,8 @@ public class WebService extends AsyncTask<String, Void, String> {
             case "listEmployees":
                 ListingEmployees();
                 break;
-            case "showEmpolyess":
-                ShowEmpolyee();
+            case "remove":
+                Remove();
                 break;
         }
         return null;
@@ -105,19 +106,19 @@ public class WebService extends AsyncTask<String, Void, String> {
         });
     }
 
-    private void ShowEmpolyee(){
+    private void Remove(){
 
-        RestClient.get().ShowEmpolyee(new RestCallback<Tab1Contacts.ShowEmployeesResponse>() {
+        RestClient.get().Remove(mRemoveRq, new RestCallback<Tab1Contacts.Remove>() {
             @Override
-            public void success(Tab1Contacts.ShowEmployeesResponse showEmployeesResponse, Response response) {
-                Log.e("showEmoplyee", response.toString() + "/" + response.getUrl());
-                listener.OnResponse(showEmployeesResponse, false, "showEmpolyee");
+            public void success(Tab1Contacts.Remove removePojo, Response response) {
+                Log.e("Remove Empolyee", response.toString() + "/" + response.getUrl());
+                listener.OnResponse(removePojo, false, "remove");
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Log.e("Url", error.toString() + "/" + error.getUrl());
-                listener.OnResponse(new Object(), true, "showEmpolyee");
+                listener.OnResponse(new Object(), true, "remove");
 
             }
         });
@@ -140,8 +141,8 @@ public class WebService extends AsyncTask<String, Void, String> {
         @GET("/listEmployees")
         void ListEmployees(RestCallback<Tab1Contacts.ListEmployeesResponse> restCallback);
 
-        @GET("/showEmpolyee")
-        void ShowEmpolyee(RestCallback<Tab1Contacts.ShowEmployeesResponse> restCallback);
+        @GET("/remove")
+        void Remove(@Body Tab1Contacts.RemoveRq shareRequest ,RestCallback<Tab1Contacts.Remove> restCallback);
 
     }
 

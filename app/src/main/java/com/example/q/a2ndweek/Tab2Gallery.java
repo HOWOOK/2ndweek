@@ -49,7 +49,7 @@ public class Tab2Gallery extends Fragment {
                 File f = new File(path);
 
                 Future uploading = Ion.with(getActivity())
-                        .load("http://143.248.36.210:3065/upload")
+                        .load("http://143.248.36.210:3069/upload")
                         .setMultipartFile("image", f)
                         .asString()
                         .withResponse()

@@ -11,12 +11,17 @@
         android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:padding="15dp"
         android:text="Select Image"
+        android:layout_margin="15dp"
+        android:background="@color/colorAccent"
+        android:textColor="#FFFFFF"
         android:id="@+id/selimg"/>
     <ImageView
         android:layout_width="400px"
@@ -28,6 +33,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Upload Image"
+        android:padding="15dp"
+        android:layout_margin="8dp"
+        android:background="@color/colorAccent"
+        android:textColor="#FFFFFF"
         android:id="@+id/uploadimg"/>
 
     <Button
@@ -35,6 +44,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Show Database"
+        android:padding="15dp"
+        android:layout_margin="8dp"
+        android:background="@color/colorAccent"
+        android:textColor="#FFFFFF"
         android:id="@+id/showimg"/>
 
 

@@ -49,7 +49,7 @@ public class Tab2Gallery extends Fragment {
                 File f = new File(path);
 
                 Future uploading = Ion.with(getActivity())
-                        .load("http://143.248.36.210:3065/upload")
+                        .load("http://143.248.36.210:3069/upload")
                         .setMultipartFile("image", f)
                         .asString()
                         .withResponse()
@@ -76,7 +76,7 @@ public class Tab2Gallery extends Fragment {
                 fintent.setType("image/jpg");
                 fintent.setAction(Intent.ACTION_GET_CONTENT);
                 try {
-                    getActivity().startActivityForResult(fintent, 100);
+                    startActivityForResult(fintent, 100);
                 } catch (ActivityNotFoundException e) {
 
                 }

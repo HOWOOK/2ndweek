@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/edt_employee_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:hint="Employee Name" />
+
+    <EditText
+        android:id="@+id/edt_employee_city"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_employee_name"
+        android:layout_centerHorizontal="true"
+        android:hint="Employee City" />
+
+    <EditText
+        android:id="@+id/edt_employee_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_employee_city"
+        android:layout_centerHorizontal="true"
+        android:hint="Employee Age" />
+
+    <Button
+        android:id="@+id/btn_insert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edt_employee_age"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:text="insert"
+        android:textColor="#FFFFFF"/>
+
+
+</RelativeLayout>

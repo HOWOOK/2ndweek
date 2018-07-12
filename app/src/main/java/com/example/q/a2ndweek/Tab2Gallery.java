@@ -24,6 +24,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.net.URI;
+import java.util.ArrayList;
 import java.util.concurrent.Future;
 
 import static android.app.Activity.RESULT_OK;
@@ -32,7 +34,9 @@ import static android.app.Activity.RESULT_OK;
 public class Tab2Gallery extends Fragment {
     Button imgsel,upload,show;
     ImageView img;
+    Uri imageURI;
     String path;
+    ArrayList<String> imglist = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,7 +53,7 @@ public class Tab2Gallery extends Fragment {
                 File f = new File(path);
 
                 Future uploading = Ion.with(getActivity())
-                        .load("http://143.248.36.210:3069/upload")
+                        .load("http://143.248.36.210:3070/upload")
                         .setMultipartFile("image", f)
                         .asString()
                         .withResponse()
@@ -87,6 +91,7 @@ public class Tab2Gallery extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), Tab2Show.class);
+                intent.putExtra("imglist", imglist);
                 getActivity().startActivity(intent);
             }
         });
@@ -101,8 +106,8 @@ public class Tab2Gallery extends Fragment {
                 if (resultCode == RESULT_OK) {
                     path = getPathFromURI(data.getData());
                     img.setImageURI(data.getData());
+                    imglist.add(data.getData().toString());
                     upload.setVisibility(View.VISIBLE);
-
                 }
         }
     }
